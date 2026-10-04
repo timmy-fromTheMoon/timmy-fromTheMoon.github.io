@@ -1,0 +1,9 @@
+import{ct as e,h as t,s as n}from"./index-BcLkoMQv.js";var r=1400,i=24;function a(e,a){if(e.length===0)return null;let o=1/0,s=1/0,c=-1/0,l=-1/0;for(let t of e){let e=n(t,a(t));o=Math.min(o,e.minX),s=Math.min(s,e.minY),c=Math.max(c,e.maxX),l=Math.max(l,e.maxY)}if(!Number.isFinite(o))return null;let u=l-s;o-=i,s-=i,c+=i,l+=i;let d=c-o,f=l-s,p=Math.min(4,r/Math.max(d,f)),m=document.createElement(`canvas`);m.width=Math.max(1,Math.ceil(d*p)),m.height=Math.max(1,Math.ceil(f*p));let h=m.getContext(`2d`);if(!h)return null;h.fillStyle=`#ffffff`,h.fillRect(0,0,m.width,m.height),h.setTransform(p,0,0,p,-o*p,-s*p);for(let n of e){let e=a(n),r=t(n,e,p);r&&(h.globalAlpha=e.opacity,h.drawImage(r.canvas,r.x,r.y,r.canvas.width/r.scale,r.canvas.height/r.scale))}return h.globalAlpha=1,{canvas:m,width:d,height:u}}var o={type:`object`,additionalProperties:!1,required:[`text`,`lines`],properties:{text:{type:`string`,description:`The handwriting transcribed exactly, with line breaks kept.`},lines:{type:`integer`,description:`How many lines of handwriting are in the image.`}}},s=`You transcribe handwriting from images.
+
+Rules:
+- Return exactly what is written, including spelling and punctuation as written.
+- Keep line breaks where the writer broke lines.
+- Do not translate, summarise, correct, complete or comment on the text.
+- Mathematical notation should be written out plainly (e.g. "x^2", "1/2").
+- If the image contains no legible handwriting, return an empty string for text.`;async function c(t,n,r){let i=a(t,n);if(!i)return null;let c=i.canvas.toDataURL(`image/png`),l=c.slice(c.indexOf(`,`)+1),u=await e({system:s,user:`Transcribe the handwriting in this image.`,schema:o,image:{base64:l,mediaType:`image/png`},effort:`low`,maxTokens:2e3,signal:r}),d=(u.text??``).trim();if(!d)return null;let f=Math.max(1,u.lines||d.split(`
+`).length);return{text:d,lineHeight:i.height/f}}export{c as recogniseHandwriting};
