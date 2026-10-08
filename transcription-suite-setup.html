@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Connect Summit to TranscriptionSuite on your own computer.">
+  <meta name="color-scheme" content="light dark">
+  <title>Local transcription setup · Summit</title>
+  <style>
+    :root { font-family: system-ui, sans-serif; color: #202e37; background: #f5f5f0; line-height: 1.65; }
+    * { box-sizing: border-box; }
+    body { margin: 0; }
+    main { max-width: 760px; margin: 0 auto; padding: 44px 24px 64px; }
+    header { margin-bottom: 34px; }
+    .brand { font-size: 13px; letter-spacing: .16em; font-weight: 700; text-transform: uppercase; }
+    h1 { font-size: clamp(30px, 6vw, 42px); line-height: 1.15; letter-spacing: -.03em; margin: 22px 0 16px; }
+    h2 { font-size: 20px; line-height: 1.35; margin: 0 0 10px; }
+    p { margin: 8px 0 14px; }
+    a { color: #155665; text-underline-offset: 3px; }
+    a:focus-visible { outline: 3px solid #bd8c3c; outline-offset: 4px; }
+    ol { list-style: none; padding: 0; counter-reset: steps; }
+    li { position: relative; counter-increment: steps; padding: 26px 24px 22px 72px; margin-bottom: 16px; border: 1px solid #d8ddda; border-radius: 12px; background: #fff; }
+    li::before { content: counter(steps); position: absolute; left: 24px; top: 24px; display: grid; place-items: center; width: 30px; height: 30px; border-radius: 50%; background: #e5efec; color: #23574c; font-weight: 700; }
+    .button { display: inline-block; background: #204e43; color: #fff; padding: 10px 16px; border-radius: 7px; text-decoration: none; font-weight: 600; margin: 5px 0 12px; }
+    code { font-size: .9em; background: #edf0ed; padding: 2px 5px; border-radius: 4px; overflow-wrap: anywhere; }
+    details { padding: 18px 0; border-bottom: 1px solid #d8ddda; }
+    summary { cursor: pointer; font-weight: 650; }
+    details p { margin-top: 14px; }
+    footer { margin-top: 30px; font-size: 13px; color: #52635f; }
+    @media (prefers-color-scheme: dark) {
+      :root { color: #e9efeb; background: #182320; }
+      li { background: #22312b; border-color: #3c4e44; }
+      a { color: #a8d9ca; }
+      li::before { background: #34594b; color: #d8f0e5; }
+      code { background: #33443a; }
+      .button { background: #a8d9ca; color: #182b24; }
+      details { border-color: #3c4e44; }
+      footer { color: #adc0b6; }
+    }
+    @media (max-width: 460px) { main { padding: 28px 16px 40px; } li { padding: 24px 16px 20px 58px; } li::before { left: 16px; } }
+  </style>
+</head>
+<body>
+<main>
+  <header>
+    <a class="brand" href="./">Summit</a>
+    <h1>Transcribe on your own computer.</h1>
+    <p>TranscriptionSuite turns your recordings into text using an engine installed on your PC or Mac. A small local connector lets Summit send audio to that engine. Each person runs their own copy.</p>
+    <p>You will need TranscriptionSuite, its model download, and Python 3.10 or newer for the connector. Setup is a one-time task; keep the engine and connector open while transcribing.</p>
+  </header>
+  <ol>
+    <li>
+      <h2>Install TranscriptionSuite</h2>
+      <p>Follow the <a href="https://github.com/homelab-00/TranscriptionSuite/blob/541bde94cbd38b51ca79d01faddec0ba9764809c/docs/README.md#2-installation" target="_blank" rel="noopener noreferrer">official installation instructions</a> for your computer, then download the Dashboard from the <a href="https://github.com/homelab-00/TranscriptionSuite/releases" target="_blank" rel="noopener noreferrer">official releases page</a>.</p>
+      <p>Windows, Linux, and Intel Macs use Docker or Podman. Apple Silicon Macs can use the bundled Metal app. The official guide covers the prerequisites, including FFmpeg on Mac for compressed audio.</p>
+    </li>
+    <li>
+      <h2>Start the local Whisper engine</h2>
+      <p>Open TranscriptionSuite’s <strong>Server</strong> tab. Select <strong>CPU Only</strong> and a <strong>Faster-Whisper (WhisperX)</strong> model. On an Apple Silicon Mac, use <strong>Metal</strong> and <strong>MLX Whisper</strong>.</p>
+      <p>Start the local server on its default HTTP port <strong>9786</strong> and wait for the model to finish downloading and loading. Start with a small multilingual Whisper model if you use a CPU. Larger models take more time and memory.</p>
+    </li>
+    <li>
+      <h2>Launch the Summit connector</h2>
+      <p>Install <a href="https://www.python.org/downloads/" target="_blank" rel="noopener noreferrer">Python 3.10 or newer</a> if needed. On Windows, select “Add Python to PATH” during installation. The connector needs no extra Python packages.</p>
+      <a class="button" href="./transcription-suite-connector.zip" download>Download local connector</a>
+      <p>Extract the ZIP into a folder. On <strong>Windows</strong>, open <code>start-windows.cmd</code>. On <strong>Mac</strong>, open <code>start-mac.command</code>; if it cannot launch, open Terminal in that folder and run <code>sh start-mac.command</code>. On <strong>Linux</strong>, run <code>sh start-linux.sh</code>.</p>
+      <p>Keep the connector window open. It displays your pairing code and the address <code>http://127.0.0.1:4787</code>.</p>
+    </li>
+    <li>
+      <h2>Pair it with Summit</h2>
+      <p>Return to Summit and open <strong>Settings → Transcription</strong>. Choose <strong>TranscriptionSuite</strong>, enter the connector address, paste the pairing code from its window, and run the connection check. Save your settings.</p>
+      <p>Allow Summit’s local-network permission if your browser asks. You can now upload or record audio in Summit and transcribe it on this computer. After restarting the connector, paste its new pairing code into Settings.</p>
+    </li>
+  </ol>
+  <details>
+    <summary>Connection or transcription trouble</summary>
+    <p><strong>Engine not running:</strong> start the local server in TranscriptionSuite on port 9786. <strong>Engine not ready:</strong> wait for the model to load. <strong>Pairing required:</strong> paste the current code from the connector window.</p>
+    <p><strong>Browser cannot connect:</strong> keep the connector open, verify its address, and allow local-network access for Summit. <strong>Port already in use:</strong> close the other connector window and restart it.</p>
+    <p><strong>CPU processing is slow:</strong> select a smaller Whisper model or use shorter recordings. Audio files can be up to 128 MiB. Keep both local apps running until processing finishes.</p>
+  </details>
+  <details>
+    <summary>Where audio goes and what is included</summary>
+    <p>The connector listens only on this computer’s loopback address. Summit sends the audio to that connector, which forwards it to your own local TranscriptionSuite engine. There is no shared or hosted transcription service.</p>
+    <p>The download contains Summit’s independent connector and launch scripts. It includes no engine, model weights, or pairing code. Install the engine separately from the official project. Temporary uploads are removed when the request finishes.</p>
+  </details>
+  <footer>
+    <p><a href="https://github.com/homelab-00/TranscriptionSuite" target="_blank" rel="noopener noreferrer">TranscriptionSuite</a> is a separate upstream project under <a href="https://github.com/homelab-00/TranscriptionSuite/blob/541bde94cbd38b51ca79d01faddec0ba9764809c/LICENSE" target="_blank" rel="noopener noreferrer">GNU GPL v3</a>. Its engine code is not bundled with Summit. Model licenses and installation requirements are documented upstream.</p>
+    <p>These instructions and the connector API were checked against upstream commit <code>541bde94cbd38b51ca79d01faddec0ba9764809c</code>. Later versions may differ.</p>
+  </footer>
+</main>
+</body>
+</html>
