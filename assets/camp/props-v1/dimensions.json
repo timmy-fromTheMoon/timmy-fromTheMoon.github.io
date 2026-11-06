@@ -1,0 +1,50 @@
+{
+  "lantern": {
+    "width": 204,
+    "height": 320
+  },
+  "cairn": {
+    "width": 220,
+    "height": 243
+  },
+  "rack": {
+    "width": 332,
+    "height": 306
+  },
+  "bunting": {
+    "width": 342,
+    "height": 259
+  },
+  "pine": {
+    "width": 214,
+    "height": 314
+  },
+  "telescope": {
+    "width": 223,
+    "height": 307
+  },
+  "cabin": {
+    "width": 328,
+    "height": 313
+  },
+  "backpack": {
+    "width": 238,
+    "height": 293
+  },
+  "stool": {
+    "width": 231,
+    "height": 248
+  },
+  "desk": {
+    "width": 335,
+    "height": 291
+  },
+  "chest": {
+    "width": 308,
+    "height": 258
+  },
+  "bedroll": {
+    "width": 317,
+    "height": 209
+  }
+}
