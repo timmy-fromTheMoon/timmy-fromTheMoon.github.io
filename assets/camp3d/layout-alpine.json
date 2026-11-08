@@ -1,0 +1,77 @@
+{
+  "camera": {
+    "position": [
+      10,
+      16.5,
+      14
+    ],
+    "target": [
+      0.1,
+      0.4,
+      -0.25
+    ],
+    "width": 20.5
+  },
+  "bounds": {
+    "minX": -6.5,
+    "maxX": 6.5,
+    "minZ": -6.5,
+    "maxZ": 6.5
+  },
+  "props": [
+    {
+      "id": "tent",
+      "label": "Trail tent",
+      "x": 2.8,
+      "z": -3,
+      "width": 3.2,
+      "depth": 3.55,
+      "movable": true
+    },
+    {
+      "id": "fire",
+      "label": "Campfire",
+      "x": -2.55,
+      "z": -0.3,
+      "width": 2.05,
+      "depth": 2.05,
+      "movable": false
+    },
+    {
+      "id": "log",
+      "label": "Fireside log",
+      "x": -3.9,
+      "z": 1.4,
+      "width": 2.25,
+      "depth": 0.6,
+      "movable": false
+    },
+    {
+      "id": "crate",
+      "label": "Supply crate",
+      "x": 3.85,
+      "z": -0.52,
+      "width": 0.86,
+      "depth": 0.82,
+      "movable": false
+    },
+    {
+      "id": "bedroll",
+      "label": "Bedroll",
+      "x": 5.1,
+      "z": -0.35,
+      "width": 1,
+      "depth": 0.5,
+      "movable": false
+    },
+    {
+      "id": "lantern",
+      "label": "Trail lantern",
+      "x": -4.8,
+      "z": -0.1,
+      "width": 0.42,
+      "depth": 0.42,
+      "movable": false
+    }
+  ]
+}
